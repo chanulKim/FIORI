@@ -1,0 +1,78 @@
+<mvc:View 
+    controllerName="odata.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+>
+
+    <f:DynamicPage toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle >
+                <f:heading>
+                    <Title text="flexible columns layout master view"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+    
+
+        <f:content>
+            <VBox fitContainer="true">
+                <Table 
+                    id="productTable"
+                    inset="false"
+                    items="{
+                        path: '/RoomstatusSet' 
+                    }"
+                    class="sapFDynamicPageAlignContent"
+                    width="auto">
+                    <columns>
+                        <Column>
+                            <Text text="지점" />
+                        </Column>
+                        <Column>
+                            <Text text="룸id" />
+                        </Column>
+                        <Column>
+                            <Text text="방 호수" />
+                        </Column>
+                        <Column>
+                            <Text text="룸타입" />
+                        </Column>
+                        <Column>
+                            <Text text="현재 방 상태" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem 
+                        type="Navigation"
+                        press=".onListItemPress">
+                        <cells>
+                            <ObjectIdentifier  title="{Plant}"></ObjectIdentifier>
+                        </cells>
+                        <cells>
+                            <ObjectIdentifier  title="{Roomid}"></ObjectIdentifier>
+                        </cells>
+                        <cells>
+                            <ObjectIdentifier  title="{Roomno}"></ObjectIdentifier>
+                        </cells>
+                        <cells>
+                            <ObjectIdentifier  title="{Roomtp}"></ObjectIdentifier>
+                        </cells>
+                        <cells>
+                            <InputListItem >
+                                <Select>
+                                    <core:Item key="need" text="시설점검필요" />
+                                    <core:Item key="exneed" text="추가점검필요" />
+                                    <core:Item key="complete" text="점검완료" />
+                            
+                                </Select>
+                            </InputListItem>
+                        </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
