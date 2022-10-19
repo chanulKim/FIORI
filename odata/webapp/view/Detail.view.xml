@@ -51,10 +51,10 @@
                                 items="{ path: '/RoomstatusSet' }">
                                 <m:columns>
                                     <m:Column>
-                                        <m:Text text="지점" />
+                                        <m:Text text="지점 " />
                                     </m:Column>
                                     <m:Column>
-                                        <m:Text text="룸 id" />
+                                        <m:Text text="room iddss" />
                                     </m:Column>
                                     <m:Column>
                                         <m:Text text="룸타입" />
