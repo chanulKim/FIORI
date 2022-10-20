@@ -12,12 +12,17 @@ sap.ui.define(
   
       return Controller.extend("odata.controller.View1", {
         onInit: function () {
-
           var oData = {
             oTableData : [],
             sSearchPlant : null,
             sSearchRoomid  : null,
-            sSearchFloor : null
+            sSearchFloor : null,
+            sPlant  : null, //   지점
+            sFloor  : null, //   층
+            sRoomid : null, // room id
+            sRoomno : null, // 방 호수
+            sCondx  : null  // 방 상태 
+            
           }
 
           var oDataModel = new JSONModel(oData);
@@ -25,7 +30,7 @@ sap.ui.define(
 
         },
 
-        
+      
         onBeforeRendering: function() {
           var oModel = this.getView().getModel();
           var oViewModel = this.getView().getModel("Main")
@@ -45,18 +50,15 @@ sap.ui.define(
 
         onSearch: function() {
           var oViewModel = this.getView().getModel("Main");
-          var sSearchPlant = oViewModel.getProperty("/sSearchPlant");
-          var sSearchPono  = oViewModel.getProperty("/sSearchRoomid");
-          var sSearchSeqno = oViewModel.getProperty("/sSearchFloor");
-
-        
+          var sSearchPlant = oViewModel.getProperty("/sSearchPlant"); //지점번호
+          var sSearchFloor = oViewModel.getProperty("/sSearchFloor"); //층수
+          var sSearchRoomid  = oViewModel.getProperty("/sSearchRoomid");//룸id
+          
           var oTable = this.getView().byId("RoomTable"); 
           var oBinding = oTable.getBinding("items"); 
 
           var aFilter = [];
-
-          
-          if(sSearchPlant){
+          if(sSearchPlant){ // 지점번호
             var oFilter = new Filter ({
                 path : 'Plant', 
                 operator: FilterOperator.Contains,
@@ -66,7 +68,7 @@ sap.ui.define(
             aFilter.push(oFilter)
           }
 
-          if(sSearchPono){
+          if(sSearchFloor){  // 층수
             var oFilter = new Filter ({
                 path : 'Floor', 
                 operator: FilterOperator.Contains,
@@ -76,7 +78,7 @@ sap.ui.define(
             aFilter.push(oFilter)
           }
 
-          if(sSearchSeqno){
+          if(sSearchRoomid){ // 룸 id 
             var oFilter = new Filter ({
                 path : 'Roomid', 
                 operator: FilterOperator.Contains,
@@ -94,13 +96,48 @@ sap.ui.define(
           this.onSearch();
         },
 
-        onListItemPress: function() {
+        onPressSave: function(oEvent) {
+          var oViewModel = this.getView().getModel('app');
+
+          var vPlant = oViewModel.oData.detail.Plant;
+          var vFloor = oViewModel.oData.detail.Floor;
+          var vRoomid = oViewModel.oData.detail.Roomid;
+          var vRoomno = oViewModel.oData.detail.Roomno;
+          var vCondx = oViewModel.oData.detail.Condx;
+          var oModel = this.getView().getModel();
+
+    
+          debugger;
+
+            
+            MessageToast.show( " 저장 되었습니다. ");
+  
+
+
+        },
+
+        onListItemPress: function(oEvent) {
           var oFCL = this.getView()
                          .getParent()
                          .getParent();
 
-          oFCL.setLayout(library.LayoutType.TwoColumnsMidExpanded);
-        }
+          var oControl = oEvent.getSource(), // oEvent가 발생괸 주체 Control // row
+              oBindingContext = oControl.getBindingContext('Main'), // row에 바인딩되어있는 정보
+              sPath = oBindingContext.getPath() // row에 바인딩되어있는 정보중에 Path /table/0/Pernr
+
+          var oRow = this.getView()
+                          .getModel('Main')
+                          .getProperty(sPath);
+
+          this.getView().getModel('app').setProperty('/detail', oRow);
+
+          debugger;
+  
+
+          oFCL.setLayout(library.LayoutType.TwoColumnsBeginExpanded);
+        },
+
+        
       });
     }
   );

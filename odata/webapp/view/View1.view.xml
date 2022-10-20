@@ -17,11 +17,7 @@
             </f:DynamicPageTitle>
         </f:title>
 
-
-
-
         <f:content>
-          
             <VBox fitContainer="true">
                 <fb:FilterBar 
                 id="filterbar" 
@@ -89,9 +85,9 @@
 											</items>
 										</ComboBox>
 								    </fb:control>
-								</fb:FilterItem>
+						</fb:FilterItem>
 
-                                <fb:FilterItem name="Roomid" label="Room 번호">
+                        <fb:FilterItem name="Roomid" label="Room 번호">
 									<fb:control>
 										<Input
 											id="ponoInput"
@@ -99,10 +95,18 @@
 											placeholder="Roomid를 입력하세요.">
 										</Input>
 									</fb:control>
-								</fb:FilterItem>
+						</fb:FilterItem>
+                       
                     </fb:filterItems>
-
+                     
                 </fb:FilterBar>
+                
+                <Bar>
+                    <contentRight>
+                     <Button text="저장" press="onPressSave"  width="100px" type="Emphasized"/>
+                    </contentRight>
+                </Bar>
+
 
                 <Table 
                     id="RoomTable"
@@ -151,15 +155,22 @@
                         </cells>
                         <cells>
                             <InputListItem >
-                                <Select>
-                                    <core:Item key="need" text="시설점검필요" />
-                                    <core:Item key="exneed" text="추가점검필요" />
-                                    <core:Item key="complete" text="점검완료" />
+                                <Select 
+                                id="CondxSelect"
+                                forceSelection="true"
+                                selectedKey="{Main>Condx}"
+                                change = ".onListItemPress"
+                                 >
+                                    <!-- <core:Item key="{Main>Condx}" text="{Main>Condx}" /> -->
+                                    
+                                    <core:Item key="시설점검필요" text="시설점검필요" />
+                                    <core:Item key="추가점검필요" text="추가점검필요" />    
+                                    <core:Item key="시설점검완료" text="시설점검완료" />
                             
                                 </Select>
                             </InputListItem>
                         </cells>
-                        </ColumnListItem>
+                    </ColumnListItem>
                     </items>
                 </Table>
             </VBox>
