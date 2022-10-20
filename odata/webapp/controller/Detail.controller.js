@@ -7,6 +7,8 @@ sap.ui.define(
   
       return Controller.extend("odata.controller.Detail", {
         onInit() {
+
+          
         }
       });
     }

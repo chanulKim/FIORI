@@ -36,7 +36,15 @@
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
-                            <m:Text text="General Information" />
+                            <m:Text text="{app>/detail/Plant}" />
+                            <!-- <m:VBox>
+                                <m:VBox>
+                                    <m:Text text="기타"/>
+                                    <m:TextArea width="100%" height="100px" />
+                                    <m:Text text="추가사항"/>
+                                    <m:TextArea width="100%" height="100px" />
+                               </m:VBox>
+                            </m:VBox>  -->
                         </blocks>
                     </ObjectPageSubSection>
                 </subSections>
@@ -46,38 +54,47 @@
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
-                            <m:Table
-                                id="suppliersTable"
-                                items="{ path: '/RoomstatusSet' }">
-                                <m:columns>
-                                    <m:Column>
-                                        <m:Text text="지점 " />
-                                    </m:Column>
-                                    <m:Column>
-                                        <m:Text text="room iddss" />
-                                    </m:Column>
-                                    <m:Column>
-                                        <m:Text text="룸타입" />
-                                    </m:Column>
-                                </m:columns>
-                                <m:items>
-                                    <m:ColumnListItem type="Navigation" press=".onDetailListItemPress">
-                                        <m:cells>
-                                            <m:ObjectIdentifier text="{Plant}"></m:ObjectIdentifier>
-                                        </m:cells>
-                                        <m:cells>
-                                            <m:ObjectIdentifier text="{Roomid}"></m:ObjectIdentifier>
-                                        </m:cells>
-                                        <m:cells>
-                                            <m:ObjectIdentifier text="{Roomtp}"></m:ObjectIdentifier>
-                                        </m:cells>
-                                    </m:ColumnListItem>
-                                </m:items>
-                            </m:Table>
+                            <m:VBox>
+                                    <m:Text text="특이사항" />
+                                    <m:TextArea 
+                                    width="100%" 
+                                    height="100px"
+                                    value="{app>/detail/Note}"
+                                    valueState="Information"
+                                    placeholder="ValueState : Information"
+                                     />
+                                     /detail
+                                    
+    
+                                    <m:Text text="추가사항"/>
+                                    <m:TextArea width="100%" height="100px" />
+
+                                    <m:Button text="저장" type="Emphasized" press="onPress" />
+
+                                    
+                                </m:VBox>
+                            <!-- <m:Table 
+                            id="suppliersTable"
+                            items="{ path: '/RoomstatusSet' }">
+                            <m:columns>
+                                <m:Column>
+                                    <m:Text text="특이사항" />
+                                </m:Column>
+                            
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem type="Navigation" press=".onDetailListItemPress">
+                                    <m:cells>
+                                        <m:ObjectIdentifier text="{Note}"></m:ObjectIdentifier>
+                                    </m:cells>
+                                
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table> -->
                         </blocks>
                     </ObjectPageSubSection>
                 </subSections>
-            </ObjectPageSection>
+            </ObjectPageSection> 
         </sections>
     </ObjectPageLayout>
 </mvc:View>
