@@ -63,7 +63,7 @@
                                     valueState="Information"
                                     placeholder="ValueState : Information"
                                      />
-                                     /detail
+                            
                                     
     
                                     <m:Text text="추가사항"/>

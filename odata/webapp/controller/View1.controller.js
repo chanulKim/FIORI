@@ -4,10 +4,11 @@ sap.ui.define(
         "sap/ui/model/json/JSONModel",
         "sap/f/library",
         "sap/ui/model/Filter",
-        "sap/ui/model/FilterOperator"
+        "sap/ui/model/FilterOperator",
+        "sap/m/MessageToast"
         
     ],
-    function(Controller, JSONModel, library,  Filter, FilterOperator) {
+    function(Controller, JSONModel, library,  Filter, FilterOperator, MessageToast) {
       "use strict";
   
       return Controller.extend("odata.controller.View1", {
@@ -17,11 +18,11 @@ sap.ui.define(
             sSearchPlant : null,
             sSearchRoomid  : null,
             sSearchFloor : null,
-            sPlant  : null, //   지점
-            sFloor  : null, //   층
-            sRoomid : null, // room id
-            sRoomno : null, // 방 호수
-            sCondx  : null  // 방 상태 
+            vPlant  : null, //   지점
+            vFloor  : null, //   층
+            vRoomid : null, // room id
+            vRoomno : null, // 방 호수
+            vCondx  : null  // 방 상태 
             
           }
 
@@ -99,20 +100,27 @@ sap.ui.define(
         onPressSave: function(oEvent) {
           var oViewModel = this.getView().getModel('app');
 
-          var vPlant = oViewModel.oData.detail.Plant;
-          var vFloor = oViewModel.oData.detail.Floor;
-          var vRoomid = oViewModel.oData.detail.Roomid;
-          var vRoomno = oViewModel.oData.detail.Roomno;
-          var vCondx = oViewModel.oData.detail.Condx;
-          var oModel = this.getView().getModel();
+           var vPlant = oViewModel.oData.detail.Plant;
+           var vFloor = oViewModel.oData.detail.Floor;
+           var vRoomid = oViewModel.oData.detail.Roomid;
+           var vRoomno = oViewModel.oData.detail.Roomno;
+           var vCondx = oViewModel.oData.detail.Condx;
 
-    
-          debugger;
+           var oDataModel = this.getView().getModel(); //??
 
-            
-            MessageToast.show( " 저장 되었습니다. ");
+           var oData = { Plant : vPlant,
+                         Floor : vFloor,
+                         Roomid : vRoomid,
+                         Roomno : vRoomno,
+                         Condx : vCondx };
+
+           var sPath = "/RoomstatusSet(Plant='"+ vPlant + "',Roomid='"+vRoomid+"')"
   
-
+           oDataModel.update(sPath,oData, {
+             success : function () {
+              MessageToast.show("변경 되었습니다.");
+             }
+           })
 
         },
 
@@ -131,7 +139,7 @@ sap.ui.define(
 
           this.getView().getModel('app').setProperty('/detail', oRow);
 
-          debugger;
+          
   
 
           oFCL.setLayout(library.LayoutType.TwoColumnsBeginExpanded);
