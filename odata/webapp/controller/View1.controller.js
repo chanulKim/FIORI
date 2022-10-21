@@ -22,7 +22,7 @@ sap.ui.define(
             vFloor  : null, //   층
             vRoomid : null, // room id
             vRoomno : null, // 방 호수
-            vCondx  : null  // 방 상태 
+            vCondx  : null  // 방 상태 z
             
           }
 
