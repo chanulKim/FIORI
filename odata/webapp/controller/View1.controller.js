@@ -24,6 +24,7 @@ sap.ui.define(
           sSearchPlant: null,
           sSearchRoomid: null,
           sSearchFloor: null,
+          sSearchCondx : null,
           vPlant: null, //   지점
           vFloor: null, //   층
           vRoomid: null, // room id
@@ -55,6 +56,7 @@ sap.ui.define(
         var sSearchPlant = oViewModel.getProperty("/sSearchPlant"); //지점번호
         var sSearchFloor = oViewModel.getProperty("/sSearchFloor"); //층수
         var sSearchRoomid = oViewModel.getProperty("/sSearchRoomid"); //룸id
+        var sSearchCondx = oViewModel.getProperty("/sSearchCondx"); //방상태
 
         var oTable = this.getView().byId("RoomTable");
         var oBinding = oTable.getBinding("items");
@@ -88,6 +90,17 @@ sap.ui.define(
             path: "Roomid",
             operator: FilterOperator.Contains,
             value1: sSearchRoomid,
+            caseSensitive: false,
+          });
+          aFilter.push(oFilter);
+        }
+
+        if (sSearchCondx) {
+          // 현재방상태  변경! 
+          var oFilter = new Filter({
+            path: "Condx",
+            operator: FilterOperator.Contains,
+            value1: sSearchCondx,
             caseSensitive: false,
           });
           aFilter.push(oFilter);

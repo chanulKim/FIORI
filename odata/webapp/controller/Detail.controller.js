@@ -3,8 +3,9 @@ sap.ui.define(
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
+    "sap/f/library"
   ],
-  function (Controller, JSONModel, MessageToast) {
+  function (Controller, JSONModel, MessageToast, library) {
     "use strict";
 
     return Controller.extend("odata.controller.Detail", {
@@ -34,7 +35,10 @@ sap.ui.define(
         oDataModel.update(sPath, oData, {
           success: function () {
             MessageToast.show("특이사항 접수 및 방 상태변경 완료.");
-          },
+            var oFCL = this.getView('View1').getParent().getParent();
+            oFCL.setLayout(library.LayoutType.OneColumn);
+          }.bind(this)
+          
         });
       },
     });

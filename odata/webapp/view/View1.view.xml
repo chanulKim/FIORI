@@ -24,7 +24,7 @@
                     persistencyKey="myPersKey"
                     useToolbar="false"
                     search=".onSearch"
-                    filterChange=".onFilterChange">
+                    showFilterConfiguration="false">
                     <fb:filterItems>
                         <fb:FilterItem name="Plant" label="지점코드">
                             <fb:control>
@@ -86,6 +86,25 @@
                                 </ComboBox>
                             </fb:control>
                         </fb:FilterItem>
+
+                        <fb:FilterItem name="Condx" label="방상태">
+                            <fb:control>
+                                <ComboBox
+                                    id="CondxInput"
+                                    selectedKey="{Main>/sSearchCondx}"
+                                    placeholder="방상태를 입력하세요."
+                                    showSecondaryValues="true">
+                                    
+                                    <items>
+                                        <core:ListItem key="시설점검필요" text="시설점검필요" /> 
+                                        <core:ListItem key="추가점검필요" text="추가점검필요" />                            
+                                        <core:ListItem key="시설점검완료" text="시설점검완료" />
+               
+                                    </items>
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterItem>
+
 
                         <fb:FilterItem name="Roomid" label="Room 번호">
                             <fb:control>
