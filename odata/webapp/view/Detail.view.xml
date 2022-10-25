@@ -28,7 +28,7 @@
                 fitContainer="true"
                 alignItems="Stretch">
                 <f:Avatar
-                    displayShape="Square"
+                    src="sap-icon://cancel-maintenance"
                     displaySize="L"
                     backgroundColor="Accent7"
                     class="sapUiTinyMarginEnd" />
